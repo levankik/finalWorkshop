@@ -20,9 +20,11 @@ public class Purchase {
     private Double purchasePrice;
     @Column(name = "purchase_date", nullable = false)
     private LocalDateTime purchaseDate;
+
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

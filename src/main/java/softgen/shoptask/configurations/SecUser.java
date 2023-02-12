@@ -13,15 +13,17 @@ import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 public class SecUser implements UserDetails {
     private String username;
     private String password;
+    private Boolean enabled;
     private Integer id;
     private Collection<SimpleGrantedAuthority> authorities;
 
     public SecUser(User user) {
         this.username = user.getUserName();
         this.password = user.getPassword();
+        this.enabled = user.getActive();
         this.id = user.getId();
-        authorities = user.getPermissions().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getName()))
+        authorities = user.getRoles().stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.getRole()))
                 .collect(Collectors.toList());
     }
 
@@ -57,6 +59,7 @@ public class SecUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
+
         return enabled;
     }
 

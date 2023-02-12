@@ -29,19 +29,22 @@ public class User {
     private String userName;
     @Column(name = "user_role", nullable = false)
     private String userRole;
+    @Column(name = "active")
+    private Boolean active;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user") //, fetch = FetchType.EAGER
     private List<Purchase> purchases;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user") //, fetch = FetchType.EAGER
     private List<Sale> sales;
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_permissions",
+            name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id")
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private  List<Permission> permissions;
+    private  List<Role> roles;
 }

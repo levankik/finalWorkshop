@@ -6,9 +6,8 @@ import softgen.shoptask.entities.Sale;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Integer> {
-    List<Sale> findSalesByDate(LocalDateTime sellDate);
+    List<Sale> findSalesBySellDate(LocalDateTime sellDate);
 }

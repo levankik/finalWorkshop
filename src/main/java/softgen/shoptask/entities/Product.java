@@ -12,10 +12,12 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "products")
+@SequenceGenerator(name = "productIdGenerator", sequenceName = "product_id_seq", allocationSize = 1)
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productIdGenerator")
     @Column(name = "id", nullable = false)
-    private String id;
+    private Integer id;
     @Column(name = "product_name", nullable = false)
     private String productName;
     @Column(name = "description", nullable = false)
@@ -30,17 +32,17 @@ public class Product {
     private Integer remaining;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product")//, fetch = FetchType.EAGER
     private List<Sale> sales;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product")//, fetch = FetchType.EAGER
     private List<Purchase> purchase;
 
-    @PrePersist
-    private void ensureId(){
-        this.setId(UUID.randomUUID().toString());
-    }
+    //@PrePersist    ვერ იმუშავა
+    //private void ensureId(){
+       // this.setId(UUID.randomUUID().toString());
+    //}
 
 }
 
