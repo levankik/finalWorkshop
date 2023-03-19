@@ -16,7 +16,8 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleIddGenerator")
     private Integer id;
-    private String role;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")

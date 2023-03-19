@@ -6,17 +6,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "products")
-@SequenceGenerator(name = "productIdGenerator", sequenceName = "product_id_seq", allocationSize = 1)
+@SequenceGenerator(name = "productIdGenerator", sequenceName = "products_id_seq", allocationSize = 1)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "productIdGenerator")
-    @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "product_name", nullable = false)
     private String productName;
@@ -32,17 +30,16 @@ public class Product {
     private Integer remaining;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")//, fetch = FetchType.EAGER
+    @OneToMany(mappedBy = "product")
     private List<Sale> sales;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "product")//, fetch = FetchType.EAGER
+    @OneToMany(mappedBy = "product")
     private List<Purchase> purchase;
 
-    //@PrePersist    ვერ იმუშავა
+    //@PrePersist
     //private void ensureId(){
-       // this.setId(UUID.randomUUID().toString());
+       //this.setId(UUID.randomUUID().toString());
     //}
-
 }
 

@@ -1,6 +1,7 @@
 package softgen.shoptask.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import softgen.shoptask.ecxeptions.NotFoundException;
 import softgen.shoptask.entities.Product;
 import softgen.shoptask.repositories.ProductRepository;
@@ -16,7 +17,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
@@ -28,7 +28,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public Product addProduct(Product product) {
+        product.setId(null);
         return productRepository.save(product);
     }
 }

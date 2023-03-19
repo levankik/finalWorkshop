@@ -1,16 +1,18 @@
 package softgen.shoptask.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import softgen.shoptask.configurations.SecUser;
+import softgen.shoptask.entities.Product;
 import softgen.shoptask.entities.Sale;
 
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface SaleService {
-    List<Sale> getSalesByDate(LocalDateTime sellDate);
+    List<Sale> getSalesByDate(LocalDate saleDate);
 
-    Sale addSale(Sale sale);
+    @Transactional
+    Sale addSale(int productId, int saleQuantity, SecUser user);
 }

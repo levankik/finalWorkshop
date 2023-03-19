@@ -14,11 +14,11 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoryIdGenerator")
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "parent_id", nullable = false)
-    private Integer parentId;
+    //@Column(name = "parent_id")
+    //private Integer parentId;
+
     @Column(name = "category_name", nullable = false)
     private String categoryName;
 

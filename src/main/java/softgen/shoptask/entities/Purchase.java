@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -14,12 +14,13 @@ import java.time.LocalDateTime;
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchaseIdGenerator")
-    @Column(name = "id")
     private Integer id;
     @Column(name = "purchase_price", nullable = false)
     private Double purchasePrice;
     @Column(name = "purchase_date", nullable = false)
-    private LocalDateTime purchaseDate;
+    private LocalDate purchaseDate;
+    @Column(name = "purchase_quantity", nullable = false)
+    private Integer purchaseQuantity;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
@@ -28,4 +29,9 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @PrePersist
+    public void prePersist () {
+        purchaseDate = LocalDate.now();
+    }
 }

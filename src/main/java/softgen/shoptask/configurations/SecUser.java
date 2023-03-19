@@ -8,8 +8,6 @@ import softgen.shoptask.entities.User;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
-
 public class SecUser implements UserDetails {
     private String username;
     private String password;
@@ -23,7 +21,7 @@ public class SecUser implements UserDetails {
         this.enabled = user.getActive();
         this.id = user.getId();
         authorities = user.getRoles().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getRole()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
 

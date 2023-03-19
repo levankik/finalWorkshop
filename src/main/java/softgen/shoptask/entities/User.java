@@ -15,20 +15,19 @@ import java.util.List;
 @Table(name = "users")
 @SequenceGenerator(name = "userIdGenerator", sequenceName = "user_id_seq", allocationSize = 1)
 public class User {
-    public User(String userName, String password, String email) {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userIdGenerator")
-    @Column(name = "id")
     private Integer id;
     @Column(name = "password")
     private String password;
     @Column(name = "user_name", nullable = false)
     private String userName;
-    @Column(name = "user_role", nullable = false)
-    private String userRole;
+    //@Column(name = "user_role", nullable = false)
+    //private String userRole;
     @Column(name = "active")
     private Boolean active;
 
@@ -47,4 +46,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private  List<Role> roles;
+
+    @PrePersist
+    public void prePersist () {
+        active = true;
+    }
 }
