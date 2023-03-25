@@ -1,5 +1,6 @@
 package softgen.shoptask.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import softgen.shoptask.ecxeptions.NotFoundException;
@@ -8,13 +9,10 @@ import softgen.shoptask.repositories.ProductRepository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @Override
     public List<Product> getProducts() {

@@ -1,6 +1,7 @@
 package softgen.shoptask.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import softgen.shoptask.configurations.SecUser;
@@ -13,12 +14,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SaleServiceImpl implements SaleService{
     private final SaleRepository saleRepository;
     private final UserRepository userRepository;
     private final ProductService productService;
-
 
     @Override
     public List<Sale> getSalesByDate(LocalDate saleDate) {

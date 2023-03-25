@@ -49,15 +49,19 @@ public class ProductController {
     }
 
     @PostMapping("/{id}/sale")
-    public Sale addSale(@PathVariable int id, @RequestParam int saleQuantity, @AuthenticationPrincipal SecUser user) {
-        return saleService.addSale(id, saleQuantity, user);
+    public ResponseEntity<Sale> addSale(@PathVariable int id, @RequestParam int saleQuantity,
+                                        @AuthenticationPrincipal SecUser user) {
+        var sale = saleService.addSale(id, saleQuantity, user);
+        var location = UriComponentsBuilder.fromPath("/sales/" + sale.getId()).build().toUri();
+        return ResponseEntity.created(location).body(sale);
     }
 
     @PreAuthorize("hasRole('MANAGER')")
     @PostMapping("/{id}/purchase")
-    public Purchase addPurchase(@PathVariable int id, @RequestParam int purchaseQuantity,
+    public ResponseEntity<Purchase> addPurchase(@PathVariable int id, @RequestParam int purchaseQuantity,
                                 @RequestParam double purchasePrice, @AuthenticationPrincipal SecUser user) {
-        return purchaseService.addPurchase(id, purchaseQuantity,  purchasePrice,  user);
+        var purchase =  purchaseService.addPurchase(id, purchaseQuantity,  purchasePrice,  user);
+        var location = UriComponentsBuilder.fromPath("/purchases/" + purchase.getId()).build().toUri();
+        return ResponseEntity.created(location).body(purchase);
     }
-
 }

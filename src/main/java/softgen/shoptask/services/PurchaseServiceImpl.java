@@ -1,6 +1,7 @@
 package softgen.shoptask.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import softgen.shoptask.configurations.SecUser;
@@ -10,7 +11,7 @@ import softgen.shoptask.repositories.PurchaseRepository;
 import softgen.shoptask.repositories.UserRepository;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
     private final UserRepository userRepository;

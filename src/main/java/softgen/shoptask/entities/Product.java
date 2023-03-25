@@ -29,6 +29,7 @@ public class Product {
     @Column(name = "remaining", nullable = false)
     private Integer remaining;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     private List<Sale> sales;
