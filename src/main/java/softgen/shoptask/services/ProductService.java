@@ -1,13 +1,11 @@
 package softgen.shoptask.services;
-
-import org.springframework.stereotype.Service;
+import softgen.shoptask.dto.ProductDto;
 import softgen.shoptask.entities.Product;
-
 import java.util.List;
 
-@Service
+
 public interface ProductService {
     List<Product> getProducts();
     Product getProductById(int id);
-    Product addProduct(Product product);
+    Product addProduct(ProductDto productDto);
 }

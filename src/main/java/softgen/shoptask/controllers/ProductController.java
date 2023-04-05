@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import softgen.shoptask.configurations.SecUser;
+import softgen.shoptask.dto.ProductDto;
 import softgen.shoptask.entities.Product;
 import softgen.shoptask.entities.Purchase;
 import softgen.shoptask.entities.Sale;
@@ -41,8 +42,8 @@ public class ProductController {
     @PreAuthorize("hasRole('MANAGER')")
     @PostMapping("")
     @Transactional
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto) {
+        var product = productService.addProduct(productDto);
         var location = UriComponentsBuilder.fromPath("/products/" + product.getId()).build().toUri();
         System.out.println(location);
         return ResponseEntity.created(location).body(product);
